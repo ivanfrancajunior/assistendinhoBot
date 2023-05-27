@@ -18,9 +18,9 @@ client.connect();
 client.on('message', (channel, tags, message, self) => {
     const isNotBot = tags.username.toLocaleLowerCase() !== process.env.TWITCH_BOT_NAME
     
-    // if (isNotBot) {
-    //     client.say(channel, `Message : "${message}" was send to ${tags.username}`)
-    // }
+    if (isNotBot && message.toLowerCase() === 'oi') {
+        client.say(channel, `Olá @${tags.username} :D`)
+    }
     if(message.toLowerCase() === '!hi') {
 		// "@alca, heya!"
 		client.say(channel, `@${tags.username}, heya!`);
@@ -28,6 +28,26 @@ client.on('message', (channel, tags, message, self) => {
     if (tags.username === 'jota_apenas' && message.includes('salve')){
         client.say(channel, `@${tags.username}, salve meu patrão!`)
     }
-	console.log(`${tags['display-name']}: ${message}`);
+
+    if (isNotBot && message.toLowerCase() === '@assistindinho, tá ai?') {
+        client.say(channel, `Oi fala comigo @${tags.username} `)
+    }
+    if (message.toLowerCase() === '!sinopse') {
+        //TODO
+        client.say(channel, `alguma sinopse... `)
+    }
+    if (message.toLowerCase() === '!duração') {
+        //TODO
+        client.say(channel, `alguma duração `)
+    }
+    if (message.toLowerCase() === '!tempo') {
+        //TODO
+        client.say(channel, `algum tempo `)
+    }
+    if (message.toLowerCase() === '!inicio') {
+        //TODO
+        client.say(channel, `algum inicio `)
+    }
+    
 });
 		
