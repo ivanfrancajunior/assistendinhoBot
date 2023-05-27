@@ -15,12 +15,13 @@
 
 **KR 1: Implementar a integração com a API do IMDb e Rotten Tomatoes**
 
- [ ] - Pesquisar e entender a documentação das APIs do IMDb e Rotten Tomatoes
- [ ] - Criar as credenciais necessárias para acessar as APIs
- [ ] - Configurar as solicitações HTTP para recuperar os dados dos filmes
- [ ] - Extrair informações relevantes dos dados retornados pela API (como título, avaliação, sinopse, elenco, etc.)
- [ ] - Testar a integração com a API para garantir que os dados sejam obtidos corretamente
- [ ] - Tratar erros e exceções que possam ocorrer durante a recuperação dos dados
+ [x] - Pesquisar e entender a documentação das APIs do IMDb e Rotten Tomatoes ❌**
+ [x] - Criar as credenciais necessárias para acessar as APIs - OMDB API
+ [x] - Configurar as solicitações HTTP para recuperar os dados dos filmes
+ [x] - Extrair informações relevantes dos dados retornados pela API (como título, avaliação, sinopse, elenco, etc.)
+ [x] - Testar a integração com a API para garantir que os dados sejam obtidos corretamente
+ [x] - Tratar erros e exceções que possam ocorrer durante a recuperação dos dados
+ ** api com limite de usos 🙄
 
 **KR 2: Implementar comandos básicos para interação com os usuários**
 
