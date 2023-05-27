@@ -26,7 +26,7 @@
 
  [x] - Definir os comandos básicos que o bot irá suportar (por exemplo, !filme, !avaliacao, !sinopse, etc.)
  [x] - Criar os mecanismos para capturar os comandos enviados pelos usuários no chat da Twitch
- [ ] - Implementar a lógica para processar os comandos e retornar as informações solicitadas
+ [x] - Implementar a lógica para processar os comandos e retornar as informações solicitadas
  [x] - Testar os comandos para garantir que eles funcionem corretamente
  [ ] - Melhorar a usabilidade dos comandos, como adicionar mensagens de erro claras quando um comando inválido for enviado
 
