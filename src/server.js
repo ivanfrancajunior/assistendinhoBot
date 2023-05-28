@@ -2,11 +2,13 @@ import { Client } from "tmi.js";
 import dotenv from "dotenv";
 dotenv.config();
 
+
+const channelWatched = process.env.WATCH_CHANEL
 const client = new Client({
   connection: {
     reconnect: true,
   },
-  channels: ["assistindinho", "jota_apenas"],
+  channels: [channelWatched],
   identity: {
     username: process.env.TWITCH_BOT_NAME,
     password: process.env.OAUTH_TOKEN,
