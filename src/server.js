@@ -1,5 +1,4 @@
 import { Client } from "tmi.js";
-import fetch from "node-fetch"; // Importe a biblioteca "node-fetch" para fazer a requisição HTTP
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -16,11 +15,11 @@ const client = new Client({
 
 client.connect();
 
-let movieInfo = {}; // Variável global para armazenar as informações do filme
+let movieInfo = {}; 
 
 const buscarFilme = async (movie) => {
   const movieApiKey = process.env.OMDB_API_KEY;
-  const url = `http://www.omdbapi.com/?apikey=${movieApiKey}&t=${movie}&plot=full`;
+  const url = `http://www.omdbapi.com/?apikey=${movieApiKey}&t=${movie}`;
 
   try {
     const res = await fetch(url);
@@ -33,6 +32,7 @@ const buscarFilme = async (movie) => {
       year: data.Year,
       director: data.Director,
       rate: data.imdbRating,
+      realise: data.Released,
     };
 
     console.log(movieInfo);
@@ -58,28 +58,24 @@ client.on("message", (channel, tags, message, self) => {
       client.say(channel, `Ocorreu um erro ao adicionar o filme, @${tags.username}`);
     }
   }
-
-  
   // Comandos 
   const showMovie = () => {
     if (!movieInfo.title) {
       return client.say(channel, "Você ainda não adicionou um filme.");
     } else {
-      return client.say(channel, `Estamos assitindo o filme "${movieInfo.title}", @${tags.username} -  Sinopse: ${movieInfo.sinopse} - Duração: ${movieInfo.runtime}`);
+      return client.say(channel, `Estamos assitindo ao filme "${movieInfo.title}", @${tags.username}. Sinopse: ${movieInfo.sinopse} | Duração: ${movieInfo.runtime} | Lançamento:${movieInfo.realise}.`);
     }
   };
-
   const showSinopse = () => {
     if (!movieInfo.title) {
-      return client.say(channel, "Você ainda não adicionou um filme.");
+      return client.say(channel, "Não temos um filme adicionado à fila.");
     } else {
       return client.say(channel, `Sinopse: ${movieInfo.sinopse}`);
     }
   };
-
   const showDuracao = () => {
     if (!movieInfo.title) {
-      return client.say(channel, "Você ainda não adicionou um filme.");
+      return client.say(channel, "Não temos um filme adicionado à fila.");
     } else {
       return client.say(channel, `Duração: ${movieInfo.runtime}`);
     }
@@ -89,6 +85,13 @@ client.on("message", (channel, tags, message, self) => {
       return client.say(channel, "Você ainda não adicionou um filme.");
     } else {
       return client.say(channel, `Segundo a IMDB o filme teve ${movieInfo.rate} de nota.`);
+    }
+  };
+  const showRealise = () => {
+    if (!movieInfo.title) {
+      return client.say(channel, "Não temos um filme adicionado à fila.");
+    } else {
+      return client.say(channel, `O filme foi lançado em ${movieInfo.realise}.`);
     }
   };
 
@@ -101,18 +104,24 @@ client.on("message", (channel, tags, message, self) => {
     client.say(channel, `Oi, fala comigo @${tags.username}`);
   }
 
-  if (message.toLowerCase() === "!sinopse") {
+  if (isNotBot && message.toLowerCase() === "!sinopse") {
     showSinopse();
   }
 
-  if (message.toLowerCase() === "!duração") {
+  if (isNotBot && message.toLowerCase() === "!duração") {
     showDuracao();
   }
-  if (message.toLowerCase() === "!filme") {
+  if (isNotBot && message.toLowerCase() === "!filme") {
     showMovie();
   }
-  if (message.toLowerCase() === "!imdb") {
+  if (isNotBot && message.toLowerCase() === "!imdb") {
     showRating();
+  }
+  if (isNotBot && message.toLowerCase() === "!lançamento") {
+    showRealise();
+  }
+  if (isNotBot && message.toLowerCase() === "!movieoptions") {
+    client.say(channel,`Oi @${tags.username}, aqui está uma lista com meus autuais comandos: !sinopse, !duração, !filme, !imdb e !lançamento. ✌🏾`);
   }
 });
 
